@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import store, { gotMessagesFromServer, writeMessage, gotNewMessageFromServer, postMessage } from '../store';
-import axios from 'axios';
-import socket from '../socket';
+import store, { writeMessage, postMessage } from '../store';
 
 export default class NewMessageEntry extends Component {
   constructor () {
@@ -18,7 +15,6 @@ export default class NewMessageEntry extends Component {
 
   componentWillUnmount() {
       this.unsubscribe();
-
   }
 
   handleChange(event) {
@@ -26,9 +22,13 @@ export default class NewMessageEntry extends Component {
   }
 
   handleSubmit(event) {
-    console.log('this state', this.state);
     event.preventDefault();
-    store.dispatch(postMessage([this.state.newMessageEntry, this.props.channelId, this.state.name]));
+    const content = this.state.newMessageEntry;
+    const name = this.state.name;
+    const channelId = this.props.channelId;
+    const messageData = {content, channelId, name};
+    const postMessageThunk = postMessage(messageData);
+    store.dispatch(postMessageThunk);
   }
 
   render () {

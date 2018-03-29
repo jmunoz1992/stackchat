@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import store, { gotMessagesFromServer, writeMessage, gotNewMessageFromServer } from './store';
+import store, { gotNewMessageFromServer } from './store';
 
 const socket = io(window.location.origin);
 

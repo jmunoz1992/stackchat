@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import store, { gotMessagesFromServer, writeMessage, gotNewMessageFromServer, postMessage, gotName } from '../store';
-import axios from 'axios';
-import socket from '../socket';
+import store, { postMessage, gotName } from '../store';
 
 export default class NameEntry extends Component {
   constructor () {
