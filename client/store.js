@@ -14,6 +14,8 @@ const WRITE_MESSAGE = 'WRITE_MESSAGE';
 
 const GOT_NAME = 'GOT_NAME';
 
+const GET_CHANNELS = 'GET_CHANNELS';
+
 // action creator
 export const gotName = function (name) {
   return {
@@ -45,6 +47,14 @@ export const writeMessage = function (inputContent) {
   };
 };
 
+// action creator
+export const gotChannel = function (inputChannels) {
+  return {
+    type: GET_CHANNELS,
+    channels: inputChannels
+  };
+};
+
 // THUNK CREATOR
 export function fetchMessages() {
   // THUNK
@@ -53,6 +63,18 @@ export function fetchMessages() {
     .then(res => res.data)
     .then(messages => {
       dispatch(gotMessagesFromServer(messages));
+    });
+  };
+}
+
+// THUNK CREATOR
+export function fetchChannels() {
+  // THUNK
+  return function thunk(dispatch) {
+    axios.get('/api/channels')
+    .then(res => res.data)
+    .then(channels => {
+      dispatch(gotChannel(channels));
     });
   };
 }
@@ -73,7 +95,8 @@ export function postMessage (messageData) {
 const initialState = {
   messages: [],
   newMessageEntry: '',
-  name: ''
+  name: '',
+  channels: [],
 };
 
 // action reducer
@@ -87,6 +110,8 @@ function reducer(state = initialState, action) {
       return { ...state, newMessageEntry: action.newMessageEntry };
     case GOT_NAME:
       return { ...state, name: action.name };
+    case GET_CHANNELS:
+      return { ...state, channels: action.channels  };
     default:
        return state;
   }

@@ -2,34 +2,34 @@ import React, { Component } from 'react';
 import store, { writeMessage, postMessage } from '../store';
 
 export default class NewMessageEntry extends Component {
-  constructor () {
-    super();
-    this.state = store.getState();
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+  // constructor () {
+  //   super();
+  //   this.state = store.getState();
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  //   this.handleChange = this.handleChange.bind(this);
+  // }
 
-  componentDidMount () {
-    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-  }
+  // componentDidMount () {
+  //   this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+  // }
 
-  componentWillUnmount() {
-      this.unsubscribe();
-  }
+  // componentWillUnmount() {
+  //     this.unsubscribe();
+  // }
 
-  handleChange(event) {
-    store.dispatch(writeMessage(event.target.value));
-  }
+  // handleChange(event) {
+  //   store.dispatch(writeMessage(event.target.value));
+  // }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const content = this.state.newMessageEntry;
-    const name = this.state.name;
-    const channelId = this.props.channelId;
-    const messageData = {content, channelId, name};
-    const postMessageThunk = postMessage(messageData);
-    store.dispatch(postMessageThunk);
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   const content = this.state.newMessageEntry;
+  //   const name = this.state.name;
+  //   const channelId = this.props.channelId;
+  //   const messageData = {content, channelId, name};
+  //   const postMessageThunk = postMessage(messageData);
+  //   store.dispatch(postMessageThunk);
+  // }
 
   constructor () {
     super();
