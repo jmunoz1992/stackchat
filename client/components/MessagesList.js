@@ -3,7 +3,7 @@ import Message from './Message';
 import NewMessageEntry from './NewMessageEntry';
 import store, { fetchMessages } from '../store';
 
-export default class MessagesList extends Component {
+export default class Messages extends Component {
 
   constructor () {
     super();
@@ -15,6 +15,7 @@ export default class MessagesList extends Component {
     store.dispatch(thunk);
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
   }
+
 
 componentWillUnmount() {
     this.unsubscribe();

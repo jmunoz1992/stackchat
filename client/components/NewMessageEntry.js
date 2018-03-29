@@ -31,6 +31,37 @@ export default class NewMessageEntry extends Component {
     store.dispatch(postMessageThunk);
   }
 
+  constructor () {
+    super();
+    this.state = store.getState();
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount () {
+    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe();
+  }
+
+  handleChange (evt) {
+    store.dispatch(writeMessage(evt.target.value))
+  }
+
+  handleSubmit (evt) {
+    evt.preventDefault();
+
+    const { name, newMessageEntry } = this.state;
+    const content = newMessageEntry;
+    const { channelId } = this.props;
+
+    store.dispatch(postMessage({ name, content, channelId }));
+    store.dispatch(writeMessage(''));
+  }
+
   render () {
     return (
       <form id="new-message-form" onSubmit={this.handleSubmit}>
@@ -39,6 +70,8 @@ export default class NewMessageEntry extends Component {
             className="form-control"
             type="text"
             name="content"
+            value={this.state.newMessageEntry}
+            onChange={this.handleChange}
             placeholder="Say something nice..."
             value={this.state.newMessageEntry}
             onChange={this.handleChange}
