@@ -28,7 +28,7 @@ export default class NewMessageEntry extends Component {
   handleSubmit(event) {
     console.log('this state', this.state);
     event.preventDefault();
-    store.dispatch(postMessage([this.state.newMessageEntry, this.props.channelId]));
+    store.dispatch(postMessage([this.state.newMessageEntry, this.props.channelId, this.state.name]));
   }
 
   render () {

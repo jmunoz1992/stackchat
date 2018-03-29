@@ -14,8 +14,6 @@ const WRITE_MESSAGE = 'WRITE_MESSAGE';
 
 const GOT_NAME = 'GOT_NAME';
 
-
-
 // action creator
 export const gotName = function (name) {
   return {
@@ -61,7 +59,8 @@ export function postMessage (message) {
   return function thunk (dispatch) {
     return axios.post('/api/messages', {
       content: message[0],
-      channelId: message[1]
+      channelId: message[1],
+      authorId: message[2],
     })
       .then(res => res.data)
       .then(newMessage => {
@@ -89,6 +88,8 @@ function reducer(state = initialState, action) {
       return { ...state, messages: [ ...state.messages, action.message ] };
     case WRITE_MESSAGE:
       return { ...state, newMessageEntry: action.newMessageEntry };
+    case GOT_NAME:
+      return { ...state, name: action.name };
     default:
        return state;
   }
