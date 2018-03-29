@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import store, { gotMessagesFromServer } from '../store';
 import axios from 'axios';
-
+// test
 
 // These values are all hardcoded...for now!
 // Soon, we'll fetch them from the server!
