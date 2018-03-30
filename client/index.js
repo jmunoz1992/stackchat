@@ -11,6 +11,9 @@ import { Main } from './components';
 
 import store, { gotMessagesFromServer } from './store';
 
+import { Provider } from 'react-redux';
+
+
 const unsubscribe = store.subscribe(function () {
   // console.log('----------------');
   // console.log('State changed!!', store.getState());
@@ -22,11 +25,20 @@ store.dispatch(gotMessagesFromServer([{ author: 'Marcy', content: 'Anybody @here
 
 store.dispatch(gotMessagesFromServer([{ author: 'Astro', content: 'To infinity and beyond!' }]));
 
-// unsubscribe();
+unsubscribe();
 
 ReactDOM.render(
-  <Router>
-    <Main />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <Main />
+    </Router>
+  </Provider>,
   document.getElementById('app')
 );
+
+// ReactDOM.render(
+//   <Router>
+//     <Main />
+//   </Router>,
+//   document.getElementById('app')
+// );
