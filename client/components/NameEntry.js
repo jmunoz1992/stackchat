@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store, { postMessage, gotName } from '../store';
+import store, { postMessage, gotName } from '../store/index';
 
 export default class NameEntry extends Component {
   constructor () {

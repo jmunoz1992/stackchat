@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store, { writeMessage, postMessage } from '../store';
+import store, { writeMessage, postMessage } from '../store/index';
 
 export default class NewMessageEntry extends Component {
   // constructor () {

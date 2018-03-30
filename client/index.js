@@ -9,23 +9,23 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Main } from './components';
 
-import store, { gotMessagesFromServer } from './store';
+import store from './store/index';
 
 import { Provider } from 'react-redux';
 
 
-const unsubscribe = store.subscribe(function () {
-  // console.log('----------------');
-  // console.log('State changed!!', store.getState());
-});
+// const unsubscribe = store.subscribe(function () {
+//   // console.log('----------------');
+//   // console.log('State changed!!', store.getState());
+// });
 
-store.dispatch(gotMessagesFromServer([{ author: 'Milton', content: 'Hey @channel' }]));
-store.dispatch(gotMessagesFromServer([{ author: 'Marcy', content: 'Anybody @here want ice cream?' }]));
+// store.dispatch(gotMessagesFromServer([{ author: 'Milton', content: 'Hey @channel' }]));
+// store.dispatch(gotMessagesFromServer([{ author: 'Marcy', content: 'Anybody @here want ice cream?' }]));
 
 
-store.dispatch(gotMessagesFromServer([{ author: 'Astro', content: 'To infinity and beyond!' }]));
+// store.dispatch(gotMessagesFromServer([{ author: 'Astro', content: 'To infinity and beyond!' }]));
 
-unsubscribe();
+// unsubscribe();
 
 ReactDOM.render(
   <Provider store={store}>
